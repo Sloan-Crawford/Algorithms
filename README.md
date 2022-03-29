@@ -1,2 +1,3 @@
 # Algorithms
- Notes and Solutions to Algorithm Challenges
+
+My notes and Solutions to Algorithm Challenges

@@ -43,6 +43,10 @@ console.log(gridTraveler(3,2)); // 3
 console.log(gridTraveler(3,3)); // 6
 console.log(gridTraveler(18,18)); // 2333606220 in 66 seconds. too long...
 
+// brute force complexity:
+// O(2^n+m) time
+// O(n + m) space
+
 // let's improve it:
 // find the duplicate sub-trees (ex. (1,2) or (2,1)) and memoize it!
 // add memo as empty object into the function arguments
@@ -61,3 +65,9 @@ const gridTraveler = (m,n, memo = {}) => {
 };
 
 // [Done] exited with code=0 in 0.051 seconds!
+
+// vs. memoized complexity:
+// O(m * n) time
+// O(n + m) space
+
+

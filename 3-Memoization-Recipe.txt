@@ -1,0 +1,16 @@
+//======= My Memoization Recipe: ==========
+
+// stick to two high-level steps:
+// 1. make it work. have a solution that is recursive. it's ok if it's slow
+//    -visualize the problem as a tree.
+//    -look for patterns. look for ways to shrink the problem.
+//    -implement the tree using recursion. find the base case(s).
+//    -test the brute force solution for correctness.
+
+// 2. make it efficient.
+//    -add a memo object 
+//       -needs to have keys that represent arguments to the function
+//       -values of the object need to represent the return values
+//       -make sure the memo is shared among all the recursive calls 
+//    -add a new base case to return memo values that captures the memo
+//    -store return values expression into the memo before finally returning the memo object

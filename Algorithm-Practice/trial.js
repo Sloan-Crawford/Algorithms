@@ -13,3 +13,5 @@ console.log(gridTraveler(2,3)); // 3
 console.log(gridTraveler(3,2)); // 3
 console.log(gridTraveler(3,3)); // 6
 console.log(gridTraveler(18,18));
+
+// [Done] exited with code=0 in 0.051 seconds!

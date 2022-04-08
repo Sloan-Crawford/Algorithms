@@ -1,11 +1,15 @@
-const fib = (n, memo = {}) => {
- if (n in memo) return memo[n];
- if (n <= 2) return 1;
- memo[n] = fib(n-1, memo) + fib(n-2, memo);
- return memo[n];
-}
+const gridTraveler = (m,n, memo = {}) => {
+ const key = m + ',' + n;
+ // are the arguments in the memo? check:
+ if (key in memo) return memo[key];
+ if (m === 1 && n === 1) return 1;
+ if (m === 0 || n === 0) return 0;
+ memo[key] = gridTraveler(m - 1, n, memo) + gridTraveler(m, n - 1, memo);
+ return memo[key];
+};
 
-console.log(fib(6));
-console.log(fib(7));
-console.log(fib(8));
-console.log(fib(50));
+console.log(gridTraveler(1,1)); // 1
+console.log(gridTraveler(2,3)); // 3
+console.log(gridTraveler(3,2)); // 3
+console.log(gridTraveler(3,3)); // 6
+console.log(gridTraveler(18,18));

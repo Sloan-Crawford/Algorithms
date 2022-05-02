@@ -17,7 +17,7 @@
 // 0 nodes should return true back to their parent, bubbling up to the top
 // nodes with remainder return false to parent
 // if parent has at least one child that returns true, the parent returns true up the tree
-// so I can stop early if even one base case returns true (it's not asking 'how MANY ways')
+// so I can stop early if even ONE base case returns true (it's not asking 'how MANY ways')
 
 const canSum = (targetSum, numbers) => {
  if (targetSum === 0) return true;
@@ -56,3 +56,40 @@ console.log(canSum(300, [7,14])); // false... but takes way too long
 //    -add a new base case to return memo values that captures the memo
 //    -store return values expression into the memo before finally returning the memo object
 
+// questions to answer: which argument directly impacts the return value? 
+// answer: targetSum does so use it as the key, numbers doesn't since it doesn't change ever. 
+
+const canSum = (targetSum, numbers, memo = {}) => {  // 1. bake in memo object
+ if (targetSum in memo) return memo[targetSum]; // 3. seen it before? then return stored value
+ if (targetSum === 0) return true;
+ if (targetSum <0) return false; 
+ for (let num of numbers) {
+  const remainder = targetSum - num; 
+  if (canSum(remainder, numbers, memo) === true) {  // 2. pass down memo object
+   memo[targetSum] = true; // 4. go into memo, use key, assign the value returned underneath
+   return true; 
+  } 
+ }
+
+    memo[targetSum] = false; // 4. do the same thing for all returns that aren't base cases
+ return false; 
+};
+
+// 4. this step will be a hard a fast rule to use when momoizing a brute force recursive function:
+// take exactly the expressions that I returned in recursive scenarios and store them in the memo. 
+
+// [Done] exited with code=0 in 0.057 seconds!
+
+
+
+// Brute force vs. Memoized:
+// O(n^m) time ---> O(m*n) time
+// O(m) space ---> O(m) space
+
+// Memoized time complexity explained:
+// we know that the value of the nodes in the tree are going to be values up to m,
+// so there are m different possible values we can have in a node.
+// However now since we're able to cash results inside of the memo object,
+// I'm never going to have to rexplore a subtree for m.
+// That being said I still have to branch n times for each of those nodes.
+// So overall, I have m * n nodes.

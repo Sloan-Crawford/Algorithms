@@ -8,8 +8,9 @@
 // -you may use an element of the array as many times as needed
 // -you may assume that all input numbers are non-negative
 
-// i.e. canSum(7, [5,3,4,7]) -> true
-// i.e. canSum(7, [2,4]) -> false
+// Examples
+canSum(7, [5,3,4,7]) // -> true
+canSum(7, [2,4])     // -> false
 
 
 // Step 1: make it work. have a solution that is recursive:

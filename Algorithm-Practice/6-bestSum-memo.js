@@ -45,7 +45,7 @@ const bestSum = (targetSum, numbers) => {
 console.log(bestSum(7, [5,3,4,7])); // [7]
 console.log(bestSum(8, [2,3,5])); // [3,5]
 console.log(bestSum(8, [1,4,5])); // [4,4]
-console.log(bestSum(100, [1,2,5,25])); // [25,25,25,25]
+console.log(bestSum(100, [1,2,5,25])); // [25,25,25,25]...runs for way too long
 
 
 // brute force time complexity:
@@ -93,4 +93,17 @@ return shortestCombination; // 5. return shortestCombination this time
 console.log(bestSum(7, [5,3,4,7])); // [7]
 console.log(bestSum(8, [2,3,5])); // [3,5]
 console.log(bestSum(8, [1,4,5])); // [4,4]
-console.log(bestSum(100, [1,2,5,25])); // [25,25,25,25]
+console.log(bestSum(100, [1,2,5,25])); // [25,25,25,25]...[Done] exited with code=0 in 0.054 seconds!
+
+
+// I know now that every targetSum is going to be a key of the memo object
+
+// Brute force vs. Memoized:
+// O(n^m * m) time ---> O(N * m^2) time
+// O(m) space ---> O(m^2) space
+
+// I have m number of keys & each key has a value which is at worst going to be an array of m elements
+// this gives us m * m or m^2 above
+
+// reduced from exponential to polinomial
+// m^2 isn't considered exponential because the exponent is a constant number

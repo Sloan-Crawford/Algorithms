@@ -1,28 +1,23 @@
-const bestSum = (targetSum, numbers, memo={}) => { // 1. add empty memo object
- if (targetSum in memo) return memo[targetSum]; // 2. add early return if target is in memo 
- if (targetSum === 0) return [];
- if (targetSum < 0) return null;
+const countConstruct = (target, wordBank, memo={}) => { // 1. add empty memo object
+ if (target in memo) return memo[target]; // 2. add early return if target is in memo
+ if (target === '') return 1; 
 
- let shortestCombination = null; 
+ let totalCount = 0;
 
- for (let num of numbers) {
-  const remainder = targetSum - num;
-  const remainderCombination = bestSum(remainder, numbers, memo); // 3. add memo to recursive calls
-  if (remainderCombination !== null) {
-   const combination = [ ...remainderCombination, num ];
-   
-   if (shortestCombination === null || combination.length < shortestCombination.length) {
-    shortestCombination = combination;
-   }
+ for (let word of wordBank) {
+  if (target.indexOf(word) === 0) { 
+   const numWaysForRest = countConstruct(target.slice(word.length), wordBank, memo); // 3. add memo
+   totalCount += numWaysForRest;
   }
  }
 
-memo[targetSum] = shortestCombination; // 4. take returns, store in memo (replace 'return')
-return shortestCombination; // 5. return shortestCombination this time
+ memo[target] = totalCount; // 4. take returns, store in memo (replace 'return')
+ return memo[target]; // 5. return after storing
 }
 
-
-console.log(bestSum(7, [5,3,4,7])); // [7]
-console.log(bestSum(8, [2,3,5])); // [3,5]
-console.log(bestSum(8, [1,4,5])); // [4,4]
-console.log(bestSum(100, [1,2,5,25])); // [25,25,25,25]
+// Test for efficiency:
+console.log(countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])); // 2 
+console.log(countConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd'])); // 1
+console.log(countConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'])); // 0
+console.log(countConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't'])); // 4
+console.log(countConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeef', ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])); // 0 ... runs way too long (16.7 seconds)

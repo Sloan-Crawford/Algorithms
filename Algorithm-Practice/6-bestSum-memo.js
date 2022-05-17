@@ -26,7 +26,7 @@ const bestSum = (targetSum, numbers) => {
 
  let shortestCombination = null; // set to null in case no numbers combo leads to the targetSum
 
- for (let num in numbers) {
+ for (let num of numbers) {
   const remainder = targetSum - num;
   const remainderCombination = bestSum(remainder, numbers);
   if (remainderCombination !== null) {

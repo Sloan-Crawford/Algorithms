@@ -79,8 +79,11 @@ const canSum = (targetSum, numbers, memo = {}) => {  // 1. bake in memo object
 // 4. this step will be a hard a fast rule to use when momoizing a brute force recursive function:
 // take exactly the expressions that I returned in recursive scenarios and store them in the memo. 
 
-// [Done] exited with code=0 in 0.057 seconds!
-
+console.log(canSum(7, [2,3])); // true
+console.log(canSum(7, [5,3,4,7])); // true
+console.log(canSum(7, [2,4])); // false
+console.log(canSum(8, [2,3,5])); // true
+console.log(canSum(300, [7,14])); // false [Done] exited with code=0 in 0.057 seconds!
 
 
 // Brute force vs. Memoized:

@@ -99,7 +99,7 @@ console.log(bestSum(100, [1,2,5,25])); // [25,25,25,25]...[Done] exited with cod
 // I know now that every targetSum is going to be a key of the memo object
 
 // Brute force vs. Memoized:
-// O(n^m * m) time ---> O(N * m^2) time
+// O(n^m * m) time ---> O(n * m^2) time
 // O(m) space ---> O(m^2) space
 
 // I have m number of keys & each key has a value which is at worst going to be an array of m elements

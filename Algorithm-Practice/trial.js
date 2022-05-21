@@ -1,23 +1,18 @@
-const countConstruct = (target, wordBank, memo={}) => { // 1. add empty memo object
- if (target in memo) return memo[target]; // 2. add early return if target is in memo
- if (target === '') return 1; 
+const allConstruct = (target, wordBank) => {
+ if (target === '') return [[]];
 
- let totalCount = 0;
+ const result = [];
 
  for (let word of wordBank) {
-  if (target.indexOf(word) === 0) { 
-   const numWaysForRest = countConstruct(target.slice(word.length), wordBank, memo); // 3. add memo
-   totalCount += numWaysForRest;
+  if (target.indexOf(word) === 0) {
+   const suffix = target.slice(word.length); // gives what's after the end of the word in target
+   const suffixWays = allConstruct(suffix, wordBank);
+   const targetWays = suffixWays.map(way => [word, ...way]);
+   result.push(...targetWays);
   }
  }
-
- memo[target] = totalCount; // 4. take returns, store in memo (replace 'return')
- return memo[target]; // 5. return after storing
+ return result;
 }
 
-// Test for efficiency:
-console.log(countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])); // 2 
-console.log(countConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd'])); // 1
-console.log(countConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'])); // 0
-console.log(countConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't'])); // 4
-console.log(countConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeef', ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])); // 0 ... runs way too long (16.7 seconds)
+
+console.log(allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']));

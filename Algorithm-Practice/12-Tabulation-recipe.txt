@@ -1,0 +1,13 @@
+Tabulation Recipe:
+
+You should have the most efficient version of the solution in one swoop (not like memoization)
+
+1. Visualize the problem as a table 
+ -size the table based on the inputs (be aware of an off-by-one scenario)
+2. Initialize the table with default values 
+ -choose compatible types (match return type with table value type. ie number to number)
+3. Seed the trivial answer into the table
+ -capture the scenario where I have a trivially small instance of the input with a known answer
+4. Iterate through the table (hard part)
+ -create logic that fills further positions of the table based on the current position
+ -to do this, focus on what options I have at any point in the problem (go right, down, etc)

@@ -1,20 +1,21 @@
-const howSum = (targetSum, numbers) => {
- const table = Array(targetSum + 1).fill(null); // 1. size the table based on input that changes (targetSum)
- // 2. and initialize table with all null values
- table[0] = []; // 3. seed index 0 with empty array
-
- for (let i=0; i<=targetSum; i++) { // 4. start iteration loop at 0, go to TARGETSUM ONLY, increment by 1
-  if (table[i] !== null) { // 4. check if value is not null. only if it isn't, look forward
-   for (let num of numbers) { 
-    table[i+num] = ([...table[i], num]);
+const bestSum = (targetSum, numbers) => {
+ const table = Array(targetSum + 1).fill(null);
+ table[0] = [];
+ 
+ for (let i=0; i<= targetSum; i++) {
+  if (table[i] !== null) {
+   for (let num of numbers) {
+    const combination = [...table[i], num]; // store possible combination to compare next
+    if (!table[i + num] || table[i + num].length > combination.length) { // if it's longer, replace it:
+     table[i + num] = combination; // replace longer value with shorter option
+    }
    }
   }
  }
  return table[targetSum];
 }
 
-console.log(howSum(7, [2,3])); // -> [3,2,2]
-console.log(howSum(7, [5,3,4,7])); // -> [3,4] one possible answer is adding 3+4, or just take 7
-console.log(howSum(8, [2,3,5])); // -> [2,2,2,2] or [3,5]
-console.log(howSum(7, [2,4])); // -> null since it's not possible
-console.log(howSum(300, [7,14])); // -> null
+console.log(bestSum(7, [5,3,4,7])); // [7]
+console.log(bestSum(8, [2,3,5])); // [3,5]
+console.log(bestSum(8, [1,4,5])); // [4,4]
+console.log(bestSum(100, [1,2,5,25])); // [25,25,25,25]...
